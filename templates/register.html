@@ -9,7 +9,7 @@
     {% endfor %}
   </ul>
   {% endif %} {% endwith %}
-  <form method="post" action="{{ url_for('register') }}">
+  <form method="post" action="{{ url_for('ratespotter_blueprint.register') }}">
     <div class="form-group">
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" required />
@@ -22,7 +22,7 @@
   </form>
 </div>
 <div class="centered-container">
-  <a class="prompt_link" href="{{ url_for('login') }}"
+  <a class="prompt_link" href="{{ url_for('ratespotter_blueprint.login') }}"
     >Already have an account? Login</a
   >
 </div>

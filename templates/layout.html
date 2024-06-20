@@ -15,13 +15,13 @@
 </head>
 <body>
     <header>
-        <a class="title" href="{{ url_for('index') }}">
+        <a class="title" href="{{ url_for('ratespotter_blueprint.index') }}">
           <h1>RateSpotter</h1>
         </a>
         <nav>
           <ul>
-            <li><a href="{{ url_for('login') }}">Login</a></li>
-            <li><a href="{{ url_for('register') }}">Register</a></li>
+            <li><a href="{{ url_for('ratespotter_blueprint.login') }}">Login</a></li>
+            <li><a href="{{ url_for('ratespotter_blueprint.register') }}">Register</a></li>
           </ul>
         </nav>
       </header>

@@ -1,39 +1,10 @@
-import os
-from pathlib import Path
-from flask import Flask, render_template, request, redirect, url_for, flash, Blueprint
-from dotenv import load_dotenv
-import secrets
+from flask import render_template, request, redirect, url_for, flash, Blueprint
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import LoginManager, UserMixin #type: ignore
-from pymongo.mongo_client import MongoClient #type: ignore
-from pymongo.server_api import ServerApi #type: ignore
-import certifi
 
-def init_login_manager(app):
-    login_manager.init_app(app)
-    login_manager.login_view = "ratespotter_blueprint.login"
+from auth import login_manager, users_collection, User
 
-movies_api_v1 = Blueprint("ratespotter_blueprint", __name__)
-
-load_dotenv()
-
-mongo_db_pw = os.environ.get("mongo_db_pw")
-mongo_user = os.environ.get("mongo_user")
-
-uri = f"mongodb+srv://{mongo_user}:{mongo_db_pw}@test-db.rzdnkbr.mongodb.net/?retryWrites=true&w=majority&appName=test-db"
-client = MongoClient(uri, server_api=ServerApi('1'), tlsCAFile=certifi.where())
-db = client[os.environ.get("db_name")] 
-users_collection = db[os.environ.get("collection")]
-
-login_manager = LoginManager()
-
-class User(UserMixin):
-    def __init__(self, username):
-        self.username = username
-
-    def get_id(self):
-        return self.username
+ratespotter_blueprint = Blueprint("ratespotter_blueprint", __name__)
     
 @login_manager.user_loader
 def load_user(username):
@@ -42,11 +13,11 @@ def load_user(username):
         return User(username=user["username"])
     return None
 
-@movies_api_v1.route("/")
+@ratespotter_blueprint.route("/")
 def index():
     return render_template("index.html")
 
-@movies_api_v1.route('/register', methods=['GET', 'POST'])
+@ratespotter_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         username = request.form['username']
@@ -62,7 +33,7 @@ def register():
 
     return render_template('register.html')
 
-@movies_api_v1.route('/login', methods=['GET', 'POST'])
+@ratespotter_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form['username']
@@ -79,14 +50,14 @@ def login():
 
     return render_template('login.html')
 
-@movies_api_v1.route('/logout')
+@ratespotter_blueprint.route('/logout')
 @login_required
 def logout():
     logout_user()
     flash('You have been logged out.', 'success')
     return redirect(url_for('ratespotter_blueprint.login'))
 
-@movies_api_v1.route('/user_homepage')
+@ratespotter_blueprint.route('/user_homepage')
 @login_required
 def user_homepage():
     return render_template("user_homepage.html", username=current_user.username)

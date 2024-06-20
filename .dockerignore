@@ -1,0 +1,9 @@
+Dockerfile
+*.pyc
+*.pyo
+*.pyd
+__pycache__
+.pytest_cache
+database/client_reviews.db
+google_creds.json
+cloud_run.txt

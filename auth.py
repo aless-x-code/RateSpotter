@@ -18,14 +18,15 @@ class User(UserMixin):
 
 load_dotenv()
 
-mongo_db_pw = os.environ.get("mongo_db_pw")
+mongo_pw = os.environ.get("mongo_pw")
 mongo_user = os.environ.get("mongo_user")
 
-uri = f"mongodb+srv://{mongo_user}:{mongo_db_pw}@test-db.rzdnkbr.mongodb.net/?retryWrites=true&w=majority&appName=test-db"
-client = MongoClient(uri, server_api=ServerApi('1'), tlsCAFile=certifi.where())
-db = client[os.environ.get("db_name")] 
-users_collection = db[os.environ.get("collection")]
+uri = f"mongodb+srv://{mongo_user}:{mongo_pw}@ratespotter-cluster.k6gug4f.mongodb.net/?retryWrites=true&w=majority&appName=ratespotter-cluster"
+mongodb_client = MongoClient(uri, server_api=ServerApi('1'), tlsCAFile=certifi.where())
+auth_db = mongodb_client[os.environ.get("auth_db")] 
+users_credentials = auth_db[os.environ.get("user_credentials")]
 
 login_manager = LoginManager()
+
 
 

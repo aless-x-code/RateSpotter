@@ -1,8 +1,6 @@
 import requests
-from pathlib import Path
 from dotenv import load_dotenv
 import os
-
 
 
 def get_tripadvisor_reviews_from_api():
@@ -32,10 +30,4 @@ def parse_tripadvisor_reviews(data):
 
     return review_dict
 
-
-def foo():
-    pass
-
-if __name__ == "__main__":
-    foo()
     

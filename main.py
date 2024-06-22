@@ -6,6 +6,8 @@ import secrets
 from auth import init_login_manager
 from routes import ratespotter_blueprint
 
+# client.close() ??
+
 
 current_file = Path(__file__).resolve()
 app_dir = current_file.parent
@@ -19,8 +21,6 @@ app.secret_key = os.environ.get("FLASK_SECRET_KEY") or secrets.token_hex(32)
 
 app.register_blueprint(ratespotter_blueprint)
 init_login_manager(app)
-
-
 
 
 if __name__ == "__main__":

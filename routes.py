@@ -3,6 +3,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from auth import login_manager, users_credentials, User
+from scripts.database import get_tripadvisor_collection
 
 ratespotter_blueprint = Blueprint("ratespotter_blueprint", __name__)
     
@@ -60,5 +61,6 @@ def logout():
 @ratespotter_blueprint.route('/user_homepage')
 @login_required
 def user_homepage():
-    return render_template("user_homepage.html", username=current_user.username)
+    return render_template("user_homepage.html", username=current_user.username, tripadvisor_reviews=get_tripadvisor_collection())
+
 

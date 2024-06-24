@@ -45,36 +45,36 @@
       <div class="column">
         <h2>Tripadvisor rating: 4.2/5</h2>
         <div class="review">
-          <img src="https://via.placeholder.com/50" alt="User Image" />
+          <img src="{{ tripadvisor_reviews[0]['avatar_small'] | default('https://via.placeholder.com/50') }}" alt="User Image" />
           <div class="review-details">
             <div class="review-header">
-              <span class="username">username</span>
+              <span class="username">{{ tripadvisor_reviews[0]["user"] | default("Unknown User") }}</span>
               <span class="stars">⭐⭐⭐⭐⭐</span>
-              <span class="date">date</span>
+              <span class="date">{{ tripadvisor_reviews[0]["post_date"] | default("Unknown Date") }}</span>
             </div>
-            <span class="review-text">5 stars! great food</span>
+            <span class="review-text">{{ tripadvisor_reviews[0]["text"] | default("Unknown Date") }}</span>
           </div>
         </div>
         <div class="review">
           <img src="https://via.placeholder.com/50" alt="User Image" />
           <div class="review-details">
             <div class="review-header">
-              <span class="username">username</span>
+              <span class="username">{{ tripadvisor_reviews[1]["user"] | default("Unknown User") }}</span>
               <span class="stars">⭐⭐⭐⭐⭐</span>
-              <span class="date">date</span>
+              <span class="date">{{ tripadvisor_reviews[1]["post_date"] | default("Unknown Date") }}</span>
             </div>
-            <span class="review-text">5 stars! great food</span>
+            <span class="review-text">{{ tripadvisor_reviews[1]["text"] | default("Unknown Date") }}</span>
           </div>
         </div>
         <div class="review">
           <img src="https://via.placeholder.com/50" alt="User Image" />
           <div class="review-details">
             <div class="review-header">
-              <span class="username">username</span>
+              <span class="username">{{ tripadvisor_reviews[2]["user"] | default("Unknown User") }}</span>
               <span class="stars">⭐⭐⭐⭐⭐</span>
-              <span class="date">date</span>
+              <span class="date">{{ tripadvisor_reviews[2]["post_date"] | default("Unknown Date") }}</span>
             </div>
-            <span class="review-text">5 stars! great food</span>
+            <span class="review-text">{{ tripadvisor_reviews[2]["text"] | default("Unknown Date") }}</span>
           </div>
         </div>
         <!-- Add more reviews for Tripadvisor here -->

@@ -1,6 +1,6 @@
 
 
-from scripts.reviews import get_all_tripadvisor_reviews_from_db
+from scripts.database.review_db import get_tripadvisor_collection
 # from .yelp import *
 
-__all__ = ["get_all_tripadvisor_reviews_from_db"]
+__all__ = ["get_tripadvisor_collection"]

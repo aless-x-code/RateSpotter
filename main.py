@@ -3,10 +3,13 @@ from pathlib import Path
 from flask import Flask
 from dotenv import load_dotenv
 import secrets
+
+
 from auth import init_login_manager
 from routes import ratespotter_blueprint
 
 # client.close() ??
+# try exception
 
 
 current_file = Path(__file__).resolve()

@@ -7,11 +7,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Space+Grotesk:wght@300&display=swap" rel="stylesheet">
+  {% block styles %}
   <link
       type="text/css"
       rel="stylesheet"
       href="{{ url_for('static', filename='style.css') }}"
     />
+    {% endblock %}
 </head>
 <body>
     <header>
@@ -20,8 +22,10 @@
         </a>
         <nav>
           <ul>
+            {% block header_routes %}
             <li><a href="{{ url_for('ratespotter_blueprint.login') }}">Login</a></li>
             <li><a href="{{ url_for('ratespotter_blueprint.register') }}">Register</a></li>
+            {% endblock %}
           </ul>
         </nav>
       </header>

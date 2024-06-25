@@ -1,4 +1,15 @@
-{% extends 'layout.html' %}
+{% extends 'header.html' %}
+
+{% block styles %}
+<link
+  type="text/css"
+  rel="stylesheet"
+  href="{{ url_for('static', filename='index.css') }}"
+/>
+{% endblock %} 
+
+
+
 {% block content %}
 <div class="container">
   <div class="image-column">

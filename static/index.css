@@ -1,0 +1,50 @@
+@import url("header.css");
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+/* Container for the two-column layout */
+.container {
+  display: flex;
+  justify-content: center; /* Center the columns horizontally */
+  align-items: center; /* Center the columns vertically */
+  margin: 20px auto; /* Center the container and add margin */
+  max-width: 1200px; /* Maximum width for the container */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Image column styling */
+.image-column {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* Center the image horizontally */
+  align-items: center; /* Center the image vertically */
+  padding: 10px;
+}
+
+.image-column img {
+  max-width: 100%;
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 10px; /* Optional: Add rounded corners */
+}
+
+/* Text column styling */
+.text-column {
+  flex: 1;
+  padding: 10px 10px 10px 30px; /* Add padding to the left to create space between columns */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center; /* Center text */
+}
+
+.rate-section {
+  padding: 20px;
+}
+
+.rate-section p {
+  font-size: 16px;
+  line-height: 1.5;
+}

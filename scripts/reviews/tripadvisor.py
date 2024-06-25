@@ -4,11 +4,11 @@ import os
 import pprint
 
 
-def get_tripadvisor_reviews_from_api():
+def get_tripadvisor_reviews_from_api(restaurant_id):
     load_dotenv()
 
     key = os.environ.get("tripadv_api_k")
-    url = f"https://api.content.tripadvisor.com/api/v1/location/2314754/reviews?language=en&limit=3&key={key}"
+    url = f"https://api.content.tripadvisor.com/api/v1/location/{restaurant_id}/reviews?language=en&limit=3&key={key}"
     headers = {"accept": "application/json"}
 
     response = requests.get(url, headers=headers)

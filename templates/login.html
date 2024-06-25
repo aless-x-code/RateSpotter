@@ -1,4 +1,15 @@
-{% extends 'layout.html' %} {% block content %}
+{% extends 'header.html' %} 
+
+{% block styles %}
+<link
+  type="text/css"
+  rel="stylesheet"
+  href="{{ url_for('static', filename='form.css') }}"
+/>
+{% endblock %} 
+
+
+{% block content %}
 <div>
   <h2>Login</h2>
   {% with messages = get_flashed_messages() %} {% if messages %}
@@ -8,7 +19,8 @@
     {% endfor %}
   </ul>
   {% endif %} {% endwith %}
-  <form method="post" action="{{ url_for('ratespotter_blueprint.login') }}">
+
+  <form method="POST" action="{{ url_for('ratespotter_blueprint.login') }}">
     <div class="form-group">
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" required />

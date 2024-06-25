@@ -1,164 +1,132 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RateSpotter</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      type="text/css"
-      rel="stylesheet"
-      href="{{ url_for('static', filename='user_homepage.css') }}"
-    />
-  </head>
-  <body>
-    <header>
-      <a class="title" href="{{ url_for('ratespotter_blueprint.index') }}">
-        <h1>RateSpotter</h1>
-      </a>
-      <nav>
-        <ul>
-          <li><a href="{{ url_for('ratespotter_blueprint.logout') }}">Logout</a></li>
-        </ul>
-      </nav>
-    </header>
+{% extends 'header.html' %} {% block styles %}
+<link
+  type="text/css"
+  rel="stylesheet"
+  href="{{ url_for('static', filename='user_homepage.css') }}"
+/>
+{% endblock %} {% block header_routes %}
+<li><a href="{{ url_for('ratespotter_blueprint.logout') }}">Logout</a></li>
+{% endblock %} {% block content %}
 
+<div class="container">
+  <span class="subtitle">Hello, </span>
+  <span class="username">{{ username }}</span>
+  <span class="subtitle">!</span> 
+  <br/>
+  <span class="subtitle">Restaurant: </span>
+  <span class="restaurant-name">{{restaurant_name}}</span>
 
+  <button>Refresh</button>
+  <span class="refresh-time">Last Refreshed: 13:45:20</span>
 
-    <h1>RateSpotter</h1>
+  <div class="columns-container">
+    <div class="column">
+      <h2>Tripadvisor rating: 4.2/5</h2>
 
-    <span class="subtitle">Hello, </span
-    ><span class="username">{{ username }}</span
+      {% for review in tripadvisor_reviews %}
 
-
-    ><span class="subtitle">!</span> <span class="subtitle">Restaurant: </span
-    ><span class="restaurant-name">Pizzarte</span>
-
-  
-    <button>Refresh</button>
-    <span class="refresh-time">Last Refreshed: 13:45:20</span>
-
-    <div class="columns-container">
-      <div class="column">
-        <h2>Tripadvisor rating: 4.2/5</h2>
-        <div class="review">
-          <img src="{{ tripadvisor_reviews[0]['avatar_small'] | default('https://via.placeholder.com/50') }}" alt="User Image" />
-          <div class="review-details">
-            <div class="review-header">
-              <span class="username">{{ tripadvisor_reviews[0]["user"] | default("Unknown User") }}</span>
-              <span class="stars">⭐⭐⭐⭐⭐</span>
-              <span class="date">{{ tripadvisor_reviews[0]["post_date"] | default("Unknown Date") }}</span>
-            </div>
-            <span class="review-text">{{ tripadvisor_reviews[0]["text"] | default("Unknown Date") }}</span>
+      <div class="review">
+        <img
+          src="{{ review['avatar_small'] | default('https://via.placeholder.com/50') }}"
+          alt="User Image"
+        />
+        <div class="review-details">
+          <div class="review-header">
+            <span class="username"
+              >{{ review["user"] | default("Unknown User") }}</span
+            >
+            <span class="stars">⭐⭐⭐⭐⭐</span>
+            <span class="date"
+              >{{ review["post_date"] | default("Unknown Date") }}</span
+            >
           </div>
+          <span class="review-text"
+            >{{ review["text"] | default("Unknown Date") }}</span
+          >
         </div>
-        <div class="review">
-          <img src="https://via.placeholder.com/50" alt="User Image" />
-          <div class="review-details">
-            <div class="review-header">
-              <span class="username">{{ tripadvisor_reviews[1]["user"] | default("Unknown User") }}</span>
-              <span class="stars">⭐⭐⭐⭐⭐</span>
-              <span class="date">{{ tripadvisor_reviews[1]["post_date"] | default("Unknown Date") }}</span>
-            </div>
-            <span class="review-text">{{ tripadvisor_reviews[1]["text"] | default("Unknown Date") }}</span>
-          </div>
-        </div>
-        <div class="review">
-          <img src="https://via.placeholder.com/50" alt="User Image" />
-          <div class="review-details">
-            <div class="review-header">
-              <span class="username">{{ tripadvisor_reviews[2]["user"] | default("Unknown User") }}</span>
-              <span class="stars">⭐⭐⭐⭐⭐</span>
-              <span class="date">{{ tripadvisor_reviews[2]["post_date"] | default("Unknown Date") }}</span>
-            </div>
-            <span class="review-text">{{ tripadvisor_reviews[2]["text"] | default("Unknown Date") }}</span>
-          </div>
-        </div>
-        <!-- Add more reviews for Tripadvisor here -->
       </div>
-
-      <div class="column">
-        <h2>Yelp rating: 4.2/5</h2>
-        <div class="review">
-          <img src="https://via.placeholder.com/50" alt="User Image" />
-          <div class="review-details">
-            <div class="review-header">
-              <span class="username">username</span>
-              <span class="stars">⭐⭐⭐⭐⭐</span>
-              <span class="date">date</span>
-            </div>
-            <span class="review-text">5 stars! great food</span>
-          </div>
-        </div>
-        <div class="review">
-          <img src="https://via.placeholder.com/50" alt="User Image" />
-          <div class="review-details">
-            <div class="review-header">
-              <span class="username">username</span>
-              <span class="stars">⭐⭐⭐⭐⭐</span>
-              <span class="date">date</span>
-            </div>
-            <span class="review-text">5 stars! great food</span>
-          </div>
-        </div>
-        <div class="review">
-          <img src="https://via.placeholder.com/50" alt="User Image" />
-          <div class="review-details">
-            <div class="review-header">
-              <span class="username">username</span>
-              <span class="stars">⭐⭐⭐⭐⭐</span>
-              <span class="date">date</span>
-            </div>
-            <span class="review-text">5 stars! great food</span>
-          </div>
-        </div>
-        <!-- Add more reviews for Yelp here -->
-      </div>
-
-      <div class="column">
-        <h2>Google rating: 4.2/5</h2>
-        <div class="review">
-          <img src="https://via.placeholder.com/50" alt="User Image" />
-          <div class="review-details">
-            <div class="review-header">
-              <span class="username">username</span>
-              <span class="stars">⭐⭐⭐⭐⭐</span>
-              <span class="date">date</span>
-            </div>
-            <span class="review-text">5 stars! great food</span>
-          </div>
-        </div>
-        <div class="review">
-          <img src="https://via.placeholder.com/50" alt="User Image" />
-          <div class="review-details">
-            <div class="review-header">
-              <span class="username">username</span>
-              <span class="stars">⭐⭐⭐⭐⭐</span>
-              <span class="date">date</span>
-            </div>
-            <span class="review-text">5 stars! great food</span>
-          </div>
-        </div>
-        <div class="review">
-          <img src="https://via.placeholder.com/50" alt="User Image" />
-          <div class="review-details">
-            <div class="review-header">
-              <span class="username">username</span>
-              <span class="stars">⭐⭐⭐⭐⭐</span>
-              <span class="date">date</span>
-            </div>
-            <span class="review-text">5 stars! great food</span>
-          </div>
-        </div>
-        <!-- Add more reviews for Google here -->
-      </div>
+      {% endfor %}
     </div>
-    <footer>
-      <p>RateSpotter &copy; 2024 | All rights reserved</p>
-      <p>Contact us: info@ratespotter.com</p>
-    </footer>
-  </body>
-</html>
+
+    <div class="column">
+      <h2>Yelp rating: 4.2/5</h2>
+      <div class="review">
+        <img src="https://via.placeholder.com/50" alt="User Image" />
+        <div class="review-details">
+          <div class="review-header">
+            <span class="username">username</span>
+            <span class="stars">⭐⭐⭐⭐⭐</span>
+            <span class="date">date</span>
+          </div>
+          <span class="review-text">5 stars! great food</span>
+        </div>
+      </div>
+      <div class="review">
+        <img src="https://via.placeholder.com/50" alt="User Image" />
+        <div class="review-details">
+          <div class="review-header">
+            <span class="username">username</span>
+            <span class="stars">⭐⭐⭐⭐⭐</span>
+            <span class="date">date</span>
+          </div>
+          <span class="review-text">5 stars! great food</span>
+        </div>
+      </div>
+      <div class="review">
+        <img src="https://via.placeholder.com/50" alt="User Image" />
+        <div class="review-details">
+          <div class="review-header">
+            <span class="username">username</span>
+            <span class="stars">⭐⭐⭐⭐⭐</span>
+            <span class="date">date</span>
+          </div>
+          <span class="review-text">5 stars! great food</span>
+        </div>
+      </div>
+      <!-- Add more reviews for Yelp here -->
+    </div>
+
+    <div class="column">
+      <h2>Google rating: 4.2/5</h2>
+      <div class="review">
+        <img src="https://via.placeholder.com/50" alt="User Image" />
+        <div class="review-details">
+          <div class="review-header">
+            <span class="username">username</span>
+            <span class="stars">⭐⭐⭐⭐⭐</span>
+            <span class="date">date</span>
+          </div>
+          <span class="review-text">5 stars! great food</span>
+        </div>
+      </div>
+      <div class="review">
+        <img src="https://via.placeholder.com/50" alt="User Image" />
+        <div class="review-details">
+          <div class="review-header">
+            <span class="username">username</span>
+            <span class="stars">⭐⭐⭐⭐⭐</span>
+            <span class="date">date</span>
+          </div>
+          <span class="review-text">5 stars! great food</span>
+        </div>
+      </div>
+      <div class="review">
+        <img src="https://via.placeholder.com/50" alt="User Image" />
+        <div class="review-details">
+          <div class="review-header">
+            <span class="username">username</span>
+            <span class="stars">⭐⭐⭐⭐⭐</span>
+            <span class="date">date</span>
+          </div>
+          <span class="review-text">5 stars! great food</span>
+        </div>
+      </div>
+      <!-- Add more reviews for Google here -->
+    </div>
+  </div>
+</div>
+<footer>
+  <p>RateSpotter &copy; 2024 | All rights reserved</p>
+  <p>Contact us: info@ratespotter.com</p>
+</footer>
+{% endblock %}

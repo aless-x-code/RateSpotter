@@ -1,4 +1,15 @@
-{% extends 'layout.html' %} {% block content %}
+{% extends 'header.html' %} 
+
+{% block styles %}
+<link
+  type="text/css"
+  rel="stylesheet"
+  href="{{ url_for('static', filename='form.css') }}"
+/>
+{% endblock %} 
+
+
+{% block content %}
 
 <div>
   <h2>Register</h2>
@@ -10,14 +21,16 @@
   </ul>
   {% endif %} {% endwith %}
   <form method="post" action="{{ url_for('ratespotter_blueprint.register') }}">
+   
     <div class="form-group">
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" required />
+      <label for="restaurant_name">Restaurant's name:</label>
+      <input if="restaurant_name" name="restaurant_name" required />
     </div>
     <div class="form-group">
-      <label for="password">Password:</label>
-      <input type="password" od="password" name="password" required />
+      <label for="restaurant_zip_code">Zip code:</label>
+      <input id="restaurant_zip_code" name="restaurant_zip_code" required />
     </div>
+
     <button type="submit">Register</button>
   </form>
 </div>

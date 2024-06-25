@@ -10,6 +10,9 @@ from routes import ratespotter_blueprint
 
 # client.close() ??
 # try exception
+# improve library function parameters
+# @media css
+# modern css practices
 
 
 current_file = Path(__file__).resolve()

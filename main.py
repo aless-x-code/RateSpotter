@@ -13,6 +13,7 @@ from routes import ratespotter_blueprint
 # improve library function parameters
 # @media css
 # modern css practices
+# GET methods for confirm_restaurant/confirm?
 
 
 current_file = Path(__file__).resolve()

@@ -38,9 +38,10 @@ def register():
 @ratespotter_blueprint.route('/confirm_restaurant', methods=['POST'])
 def confirm_restaurant():
     if request.method == 'POST':
-        location_id = request.form["selected_restaurant"]
+        location_id = request.form["selected_restaurant_id"]
 
         selected_restaurant = get_restaurant_by_id(location_id)
+
 
         return render_template('complete_registration.html', restaurant=selected_restaurant)
 
@@ -54,25 +55,29 @@ def complete_registration():
         password = request.form["password"]
         hashed_password = generate_password_hash(password)
         restaurant_id = request.form["restaurant_id"]
+        restaurant_name = request.form["restaurant_name"]
 
         if users_credentials.find_one({'username': username}):
             flash('Username already exists. Choose a different one.', 'danger')
+            selected_restaurant = get_restaurant_by_id(restaurant_id)
+            return render_template('complete_registration.html', restaurant=selected_restaurant)
         elif users_credentials.find_one({'restaurant_id': restaurant_id}):
             flash('Restaurant is already linked to another account.', 'danger')
         else:
             users_credentials.insert_one({
                 'username': username,
                 'password': hashed_password,
-                'restaurant_id': restaurant_id
+                'restaurant_id': restaurant_id,
+                'restaurant_name': restaurant_name
             })
             flash('Registration successful. You can now log in.', 'success')
-            return redirect(url_for('ratespotter_blueprint.login'))
+            return render_template('login.html', username=username)
 
     return redirect(url_for('ratespotter_blueprint.register'))
 
 
 @ratespotter_blueprint.route('/login', methods=['GET', 'POST'])
-def login():
+def login():    
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']

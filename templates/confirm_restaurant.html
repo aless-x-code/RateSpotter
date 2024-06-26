@@ -20,12 +20,12 @@
       <li>
         <input
           type="radio"
-          id="restaurant_{{ restaurant.location_id }}"
-          name="selected_restaurant"
+          id="{{ restaurant.location_id }}"
+          name="selected_restaurant_id"
           value="{{ restaurant.location_id }}"
           required
         />
-        <label for="restaurant_{{ restaurant.id }}"
+        <label for="{{ restaurant.location_id }}"
           >{{ restaurant.name }} - {{ restaurant.address }}</label
         >
       </li>

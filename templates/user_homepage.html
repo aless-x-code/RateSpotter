@@ -1,0 +1,72 @@
+{% extends 'header.html' %} 
+
+{% block styles %}
+<link
+  type="text/css"
+  rel="stylesheet"
+  href="{{ url_for('static', filename='user_homepage.css') }}"
+/>
+{% endblock %} 
+
+{% block header_routes %}
+<li><a href="{{ url_for('ratespotter_blueprint.logout') }}">Logout</a></li>
+{% endblock %} 
+
+
+{% block content %}
+<div class="container">
+  <span class="subtitle">Hello, </span>  <span class="username">{{ username }} !</span>
+  <br />
+  <span class="subtitle">Restaurant: </span>  <span class="restaurant-name">{{restaurant_name}}</span>
+
+  <button>Refresh</button>
+  <span class="refresh-time">Last Refreshed: 1:45:20</span>
+
+  <div class="columns-container">
+    {% for ReviewManager in range(review_managers_len) %}
+    <div class="column">
+      <h2>{{ review_managers[ReviewManager].dashboard_name }}</h2>
+
+      {% if review_managers[ReviewManager].review_count != 0 %} 
+      {% set reviews = review_managers[ReviewManager].update_and_get_reviews() %} 
+      {% for i in range(review_managers[ReviewManager].review_count) %}
+
+      <div class="review">
+        {% if reviews[i]['avatar'] %}
+        <img src="{{ reviews[i]['avatar'] }}" alt="User Image" />
+        {% else %}
+        <img src="https://i.imgur.com/mv75hiL.png" alt="User Image" />
+        {% endif %}
+        <div class="review-details">
+          <div class="review-header">
+            <span class="username">{{ reviews[i]['user'] | default("Unknown User") }}</span>
+            <span class="stars">{{ generate_stars(reviews[i]['rating']) }}</span> 
+            <span class="void-stars">{{ generate_void_stars(reviews[i]['rating']) }}</span>
+            <span class="date">{{ reviews[i]['post_date'] | default("Unknown Date") }}</span>
+          </div>
+          <span class="review-text">{{ reviews[i]['text'] | default("Unknown Text") }}</span>
+        </div>
+      </div>
+      {% endfor %} 
+
+      {% else %}
+      <div class="review">
+        <div class="review-details">
+          <div class="review-header">
+            <span class="review-text">Couldn't find any reviews</span>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+
+
+    <footer>
+      <p>RateSpotter &copy; 2024 | All rights reserved</p>
+      <p>Contact us: info@ratespotter.com</p>
+    </footer>
+
+    {% endblock %}
+  </div>
+</div>

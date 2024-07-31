@@ -1,0 +1,77 @@
+{% extends 'header.html' %} 
+
+{% block styles %}
+<link
+  type="text/css"
+  rel="stylesheet"
+  href="{{ url_for('static', filename='form.css') }}"
+/>
+{% endblock %} 
+
+{% block content %}
+<div class="complete_registration">
+  <h2>Complete Registration</h2>
+
+  <div id="loading">
+    <div class="loader"></div>
+    <p>Grabbing your restaurant's details, please wait...</p>
+  </div>
+
+  {% with messages = get_flashed_messages() %} 
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} 
+  {% endwith %}
+
+  <form id="registrationForm" method="POST" action="{{ url_for('ratespotter_blueprint.complete_registration') }}">
+
+    <input type="hidden" name="selected_restaurant_id" value="{{ selected_restaurant_id }}" />
+    <input type="hidden" name="selected_restaurant_name" value="{{ selected_restaurant_name }}" />
+    <input type="hidden" name="selected_restaurant_address" value="{{ selected_restaurant_address }}" />
+
+    <p>{{ selected_restaurant_name }} - {{ selected_restaurant_address }}</p>
+
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required />
+    </div>
+
+    <button type="submit">Register</button>
+    
+  </form>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#registrationForm').on('submit', function(event) {
+                event.preventDefault();
+                $('#loading').show();
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ url_for('ratespotter_blueprint.complete_registration') }}",
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        $('#loading').hide();
+                        $('body').html(response);
+                    },
+                    error: function() {
+                        $('#loading').hide();
+                        alert('An error occurred while processing your request. Please try again.');
+                    }
+                });
+            });
+        });
+    </script>
+
+
+</div>
+{% endblock %}

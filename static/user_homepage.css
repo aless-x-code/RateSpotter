@@ -1,0 +1,155 @@
+@import url("header.css");
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  margin: 0;
+  padding: 10px 20px 60px 20px;
+  background-color: #f4f4f4;
+  position: relative;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+h1 {
+  color: #333;
+  text-align: center;
+}
+
+h2 {
+  color: #666;
+  text-align: left;
+  margin-top: 20px;
+}
+
+.subtitle,
+.username,
+.restaurant-name {
+  display: inline; 
+  white-space: nowrap; 
+}
+
+.subtitle {
+  font-size: large;
+  color: #444;
+}
+
+.username {
+  font-weight: bold;
+  font-style: italic;
+}
+
+.restaurant-name {
+  font-style: italic;
+  font-weight: bold;
+}
+
+.refresh-time {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  text-align: center;
+  color: #666;
+}
+
+button {
+  display: block;
+  margin: 5px auto;
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+.columns-container {
+  /* display: flex; */
+  /* flex-wrap: wrap; */
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.column {
+  flex: 1;
+  min-width: 300px;
+  max-width: 80%;
+  /* max-width: 33%; */
+}
+
+.review {
+  display: flex;
+  align-items: flex-start;
+  background-color: white;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review img {
+  border-radius: 50%;
+  margin-right: 15px;
+  width: 50px;
+  height: 50px;
+}
+
+.review-details {
+  max-width: 1500px;
+  /* max-width: 500px; */
+}
+
+.review-details .username {
+  font-weight: bold;
+  color: #333;
+}
+
+.review-details .stars {
+  color: #f6be63;
+}
+
+.review-details .void-stars {
+  color: grey;
+  margin-right: 5px;
+}
+
+.review-details .date {
+  font-size: 0.9em;
+  color: #999;
+}
+
+.review-details .review-text {
+  margin-top: 5px;
+  color: #555;
+}
+
+.review-header {
+  /* display: flex; */
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.review-header .username {
+  margin-right: 5px; 
+}
+
+footer {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+footer p {
+  margin: 5px 0;
+}

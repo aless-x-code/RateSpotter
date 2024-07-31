@@ -1,0 +1,1 @@
+reviews_to_store = 3

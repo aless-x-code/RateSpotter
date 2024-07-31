@@ -1,0 +1,76 @@
+{% extends 'header.html' %} 
+
+{% block styles %}
+<link
+  type="text/css"
+  rel="stylesheet"
+  href="{{ url_for('static', filename='form.css') }}"
+/>
+{% endblock %} 
+
+
+{% block content %}
+<div>
+  <h2>Login</h2>
+
+  <div id="loading">
+    <div class="loader"></div>
+    <p>Loading your reviews, please wait...</p>
+  </div>
+
+  {% with messages = get_flashed_messages() %} 
+    {% if messages %} 
+    <ul class="messages">
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} 
+  {% endwith %}
+
+  <form id="loginForm" method="POST" action="{{ url_for('ratespotter_blueprint.login') }}">
+    
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" value="{{ username }}" required />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input id="password" type="password" name="password" required />
+    </div>
+
+    <button type="submit">Login</button>
+  </form>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#loginForm').on('submit', function(event) {
+                event.preventDefault();
+                $('#loading').show();
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ url_for('ratespotter_blueprint.login') }}",
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        $('#loading').hide();
+                        $('body').html(response);
+                    },
+                    error: function() {
+                        $('#loading').hide();
+                        alert('An error occurred while processing your request. Please try again.');
+                    }
+                });
+            });
+        });
+    </script>
+
+
+</div>
+
+<div class="centered-container">
+  <a class="prompt_link" href="{{ url_for('ratespotter_blueprint.find_restaurant') }}">Don't have an account? Register</a>
+</div>
+
+{% endblock %}

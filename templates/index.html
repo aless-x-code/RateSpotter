@@ -1,0 +1,28 @@
+{% extends 'header.html' %}
+
+{% block styles %}
+<link
+  type="text/css"
+  rel="stylesheet"
+  href="{{ url_for('static', filename='index.css') }}"
+/>
+{% endblock %} 
+
+
+
+{% block content %}
+<div class="container">
+  <div class="image-column">
+    <img src="https://i.imgur.com/KDD4WHs.jpeg" alt="Image" />
+  </div>
+  <div class="text-column">
+    <div class="rate-section">
+      <p>
+        Empower Your Restaurant's Success! Sign up with RateSpotter today to gain
+        valuable insights into customer feedback across platforms. Elevate your
+        reputation and drive success with our comprehensive review dashboard!
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

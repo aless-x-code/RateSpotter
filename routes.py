@@ -34,11 +34,11 @@ def find_restaurant():
             if matching_restaurants:
                 return render_template('select_restaurant.html', matching_restaurants=matching_restaurants)
             else:
-                flash('No matching restaurants found. Please try again.', 'danger')
+                flash('No matching restaurants found. Please try again.', 'failure')
                 return redirect(url_for('ratespotter_blueprint.find_restaurant'))
         except Exception as e:
             logging.error(f"An unexpected error occurred: {e}")
-            flash('An error occurred while processing your request. Please try again.', 'danger')
+            flash('An error occurred while processing your request. Please try again.', 'failure')
             return redirect(url_for('ratespotter_blueprint.find_restaurant'))
         
     return render_template('find_restaurant.html')
@@ -56,7 +56,7 @@ def select_restaurant():
         
         except Exception as e:
             logging.error(f"An unexpected error occurred: {e}")
-            flash('An error occurred while processing your request. Please try again.', 'danger')
+            flash('An error occurred while processing your request. Please try again.', 'failure')
             return redirect(url_for('ratespotter_blueprint.find_restaurant'))
         
     return redirect(url_for('ratespotter_blueprint.find_restaurant'))
@@ -74,24 +74,24 @@ def complete_registration():
             selected_restaurant_address = request.form["selected_restaurant_address"]
 
             if users_credentials.find_one({'username': username}):
-                flash('Username already exists. Choose a different one.', 'danger')
+                flash('Username already exists. Choose a different one.', 'failure')
                 return render_template('complete_registration.html', 
                                     selected_restaurant_id=selected_restaurant_id, selected_restaurant_name=selected_restaurant_name, selected_restaurant_address=selected_restaurant_address)
             elif users_credentials.find_one({'restaurant_name': selected_restaurant_name}):
-                flash('Restaurant is already linked to another account.', 'danger')
+                flash('Restaurant is already linked to another account.', 'failure')
             else:
                 hashed_password = generate_password_hash(password)
                 tripadvisor_id = get_tripadvisor_id(selected_restaurant_name, selected_restaurant_address)
-                yelp_id = get_yelp_id(selected_restaurant_name, selected_restaurant_address)
-                google_id = get_google_id(selected_restaurant_name, selected_restaurant_address)
+                # yelp_id = get_yelp_id(selected_restaurant_name, selected_restaurant_address)
+                # google_id = get_google_id(selected_restaurant_name, selected_restaurant_address)
 
                 users_credentials.insert_one({
                     'username': username,
                     'password': hashed_password,
                     'restaurant_id': selected_restaurant_id,
                     'tripadvisor_id': tripadvisor_id,
-                    'yelp_id': yelp_id,
-                    'google_id': google_id,
+                    # 'yelp_id': yelp_id,
+                    # 'google_id': google_id,
                     'restaurant_name': selected_restaurant_name,
                     'restaurant_address': selected_restaurant_address
                 })
@@ -100,7 +100,7 @@ def complete_registration():
             
         except Exception as e:
             logging.error(f"An unexpected error occurred: {e}")
-            flash('An error occurred while processing your request. Please try again.', 'danger')
+            flash('An error occurred while processing your request. Please try again.', 'failure')
             return redirect(url_for('ratespotter_blueprint.find_restaurant'))
 
     return redirect(url_for('ratespotter_blueprint.find_restaurant'))
@@ -120,10 +120,10 @@ def login():
                 flash('Login successful.', 'success')
                 return redirect(url_for('ratespotter_blueprint.user_homepage'))
             else:
-                flash('Invalid username or password. Please try again.', 'danger')
+                flash('Invalid username or password. Please try again.', 'failure')
         except Exception as e:
             logging.error(f"An unexpected error occurred: {e}")
-            flash('An error occurred while processing your request. Please try again.', 'danger')
+            flash('An error occurred while processing your request. Please try again.', 'failure')
             return redirect(url_for('ratespotter_blueprint.login'))
 
     return render_template('login.html')
@@ -141,10 +141,10 @@ def user_homepage():
         review_collection = user_reviews[f"{username}_review_collection"]
 
         if username not in cache:
-            cache[username] = [ReviewManager('tripadvisor', review_collection), 
-                               ReviewManager('google', review_collection), 
-                               ReviewManager('yelp', review_collection)]
-            # cache[username] = [ReviewManager('tripadvisor', review_collection)]
+            # cache[username] = [ReviewManager('tripadvisor', review_collection), 
+            #                    ReviewManager('google', review_collection), 
+            #                    ReviewManager('yelp', review_collection)]
+            cache[username] = [ReviewManager('tripadvisor', review_collection)]
 
         review_managers = cache[username]
     
@@ -156,7 +156,7 @@ def user_homepage():
                             )
     except Exception as e:
             logging.error(f"An unexpected error occurred while loading user homepage: {e}")
-            flash('An error occurred while processing your request. Please try again.', 'danger')
+            flash('An error occurred while processing your request. Please try again.', 'failure')
             return redirect(url_for('ratespotter_blueprint.logout'))
 
 
@@ -179,7 +179,7 @@ def utility_processor():
             return star_emoji * int(rating)
         except Exception as e:
             logging.error(f"An unexpected error occurred while generating stars for rating: {e}")
-            flash('An error occurred while processing your request. Please try again.', 'danger')
+            flash('An error occurred while processing your request. Please try again.', 'failure')
             return redirect(url_for('ratespotter_blueprint.logout'))
     
     def generate_void_stars(rating):
@@ -188,7 +188,7 @@ def utility_processor():
             return void_star_emoji * (5 - int(rating)) 
         except Exception as e:
             logging.error(f"An unexpected error occurred while generatin empty stars for rating: {e}")
-            flash('An error occurred while processing your request. Please try again.', 'danger')
+            flash('An error occurred while processing your request. Please try again.', 'failure')
             return redirect(url_for('ratespotter_blueprint.logout'))
     
     return dict(generate_stars=generate_stars, generate_void_stars=generate_void_stars)

@@ -1,9 +1,5 @@
 @import url("header.css");
 
-* {
-  font-family: "Poppins", sans-serif;
-}
-
 /* Container for the two-column layout */
 .container {
   display: flex;

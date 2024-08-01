@@ -18,15 +18,7 @@
     <p>Loading your reviews, please wait...</p>
   </div>
 
-  {% with messages = get_flashed_messages() %} 
-    {% if messages %} 
-    <ul class="messages">
-      {% for message in messages %}
-      <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %} 
-  {% endwith %}
+  {% include 'flash_messages.html' %}
 
   <form id="loginForm" method="POST" action="{{ url_for('ratespotter_blueprint.login') }}">
     

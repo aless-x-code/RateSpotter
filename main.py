@@ -17,7 +17,9 @@ import os
     # too long username, dropdown reviews
 # Add more reviews (5)
 # Input validation
-# error/success flash messages color
+
+# Git tracker
+# input validation
 
 
 

@@ -7,3 +7,4 @@ __pycache__
 database/client_reviews.db
 google_creds.json
 cloud_run.txt
+project_notes.txt

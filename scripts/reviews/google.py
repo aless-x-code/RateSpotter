@@ -1,4 +1,4 @@
-import serpapi # type: ignore
+import serpapi 
 from dotenv import load_dotenv
 import os
 import uuid

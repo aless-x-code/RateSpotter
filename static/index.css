@@ -36,11 +36,11 @@
   text-align: center; /* Center text */
 }
 
-.rate-section {
+.homepage-billboard {
   padding: 20px;
 }
 
-.rate-section p {
-  font-size: 16px;
+.homepage-billboard p {
+  font-size: 26px;
   line-height: 1.5;
 }

@@ -82,16 +82,16 @@ def complete_registration():
             else:
                 hashed_password = generate_password_hash(password)
                 tripadvisor_id = get_tripadvisor_id(selected_restaurant_name, selected_restaurant_address)
-                # yelp_id = get_yelp_id(selected_restaurant_name, selected_restaurant_address)
-                # google_id = get_google_id(selected_restaurant_name, selected_restaurant_address)
+                yelp_id = get_yelp_id(selected_restaurant_name, selected_restaurant_address)
+                google_id = get_google_id(selected_restaurant_name, selected_restaurant_address)
 
                 users_credentials.insert_one({
                     'username': username,
                     'password': hashed_password,
                     'restaurant_id': selected_restaurant_id,
                     'tripadvisor_id': tripadvisor_id,
-                    # 'yelp_id': yelp_id,
-                    # 'google_id': google_id,
+                    'yelp_id': yelp_id,
+                    'google_id': google_id,
                     'restaurant_name': selected_restaurant_name,
                     'restaurant_address': selected_restaurant_address
                 })
@@ -141,10 +141,12 @@ def user_homepage():
         review_collection = user_reviews[f"{username}_review_collection"]
 
         if username not in cache:
-            # cache[username] = [ReviewManager('tripadvisor', review_collection), 
-            #                    ReviewManager('google', review_collection), 
-            #                    ReviewManager('yelp', review_collection)]
-            cache[username] = [ReviewManager('tripadvisor', review_collection)]
+            cache[username] = [ReviewManager('tripadvisor', review_collection), 
+                               ReviewManager('google', review_collection), 
+                               ReviewManager('yelp', review_collection)]
+            
+            # Used for testing, to avoid draining SerpApi calls
+            # cache[username] = [ReviewManager('tripadvisor', review_collection)] 
 
         review_managers = cache[username]
     

@@ -5,3 +5,4 @@ database/client_reviews.db
 google_creds.json
 .env
 cloud_run.txt
+project_notes.txt

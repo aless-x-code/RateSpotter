@@ -19,8 +19,8 @@ It uses Flask as a web framework, MongoDB/Flask-login for user authentication an
    pip install -r requirments.txt
 
 2. Enviorment variables
-<br>
-Create a .env file and store your enviorment variables
+    <br>
+    Create a .env file and store your enviorment variables
     ```sh
     # Flask
     FLASK_SECRET_KEY=

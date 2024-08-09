@@ -4,6 +4,8 @@ RateSpotter is a full-stack web app that allows registered users to have a snaps
 
 It uses Flask as a web framework, MongoDB/Flask-login for user authentication and database, Docker for containerization, and Google cloud run for deployment to the server.
 
+Link: https://ratespotter5-gp43efip5a-uc.a.run.app/
+
 
 ## Installation
 

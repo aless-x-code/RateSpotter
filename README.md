@@ -47,6 +47,4 @@ It uses Flask as a web framework, MongoDB/Flask-login for user authentication an
 
 ## DEMO
 
-<a href="https://www.youtube.com/watch?v=bSPoh7LoUU0" target="_blank">
-  <img src="https://i.imgur.com/R4ttXrQ.png" alt="Watchs the video" width="640" height="360">
-</a>
+![Description of the GIF](https://github.com/aless-x-code/RateSpotter/blob/main/demo.gif)

@@ -39,7 +39,7 @@ It uses Flask as a web framework, MongoDB/Flask-login for user authentication an
 3. Other setup
 
     <br>
-    You will need to setup APIs, Google cloud, MongoDB, and Docker
+    You will need to setup APIs, Google cloud, MongoDB, and Docker.
 
 ## Local Deployment
 
@@ -48,5 +48,5 @@ It uses Flask as a web framework, MongoDB/Flask-login for user authentication an
 ## DEMO
 
 <a href="https://www.youtube.com/watch?v=bSPoh7LoUU0" target="_blank">
-  <img src="https://i.imgur.com/R4ttXrQ.png" alt="Watch the video" width="640" height="360">
+  <img src="https://i.imgur.com/R4ttXrQ.png" alt="Watchs the video" width="640" height="360">
 </a>

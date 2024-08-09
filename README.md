@@ -39,7 +39,6 @@ Link: https://ratespotter5-gp43efip5a-uc.a.run.app/
     user_credentials=
 
 3. Other setup
-
     <br>
     You will need to setup APIs, Google cloud, MongoDB, and Docker.
 

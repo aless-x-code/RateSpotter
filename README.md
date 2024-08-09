@@ -37,6 +37,7 @@ It uses Flask as a web framework, MongoDB/Flask-login for user authentication an
     user_credentials=
 
 3. Other setup
+
     <br>
     You will need to setup APIs, Google cloud, MongoDB, and Docker
 
